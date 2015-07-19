@@ -1,15 +1,32 @@
 package com.ontotext.kstoilov.interview.task1;
 
-import org.xml.sax.Attributes;
-import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
-
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Stack;
 
 import org.ccil.cowan.tagsoup.jaxp.SAXParserImpl;
+import org.openrdf.model.Model;
+import org.openrdf.model.Statement;
+import org.openrdf.model.URI;
+import org.openrdf.model.ValueFactory;
+import org.openrdf.model.impl.LinkedHashModel;
+import org.openrdf.model.vocabulary.FOAF;
+import org.openrdf.model.vocabulary.RDF;
+import org.openrdf.model.vocabulary.RDFS;
+import org.openrdf.model.vocabulary.XMLSchema;
+import org.openrdf.repository.Repository;
+import org.openrdf.repository.RepositoryConnection;
+import org.openrdf.repository.RepositoryResult;
+import org.openrdf.repository.sail.SailRepository;
+import org.openrdf.rio.RDFFormat;
+import org.openrdf.rio.Rio;
+import org.openrdf.sail.memory.MemoryStore;
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
+
+import info.aduna.iteration.Iterations;
 
 public class HTMLTransformator {
 
@@ -32,7 +49,7 @@ public class HTMLTransformator {
 			@Override
 			public void startElement(String uri, String localName, String name, Attributes attributes)
 					throws SAXException {
-				 
+				 	
 				if (name.equalsIgnoreCase("table")) {
 					tables.push(new Table());
 				}
@@ -72,10 +89,32 @@ public class HTMLTransformator {
 		
 		ArrayList<String> firstNames = tables.peek().getColumnByHeader("First Name");
 		ArrayList<String> lastNames = tables.peek().getColumnByHeader("Last Name");
+
+		String namespace = "http://ontotext.com/kstoilov/interview/task1";
+		Repository rep = new SailRepository(new MemoryStore());
+		rep.initialize();
+		ValueFactory f  = rep.getValueFactory();
 		
-		for (int i = 0; i < firstNames.size(); i++) {
-			System.out.println(firstNames.get(i) + " " + lastNames.get(i));
+		RepositoryConnection conn = rep.getConnection();
+		
+		try {
+			for (int i = 0; i < firstNames.size(); i++) {
+				String person = firstNames.get(i) + " " + lastNames.get(i);
+				URI personURI= f.createURI(namespace, person);
+				conn.add(personURI, RDF.TYPE, FOAF.PERSON);
+				conn.add(personURI, RDFS.LABEL, f.createLiteral(person, XMLSchema.STRING));
+				RepositoryResult<Statement> statements =  conn.getStatements(null, null, null, true);
+				Model model = Iterations.addAll(statements, new LinkedHashModel());
+				Rio.write(model, System.out, RDFFormat.TURTLE);
+			}
 		}
+		finally {
+			conn.close();
+		}
+		
+		
+		
+		
 		
 	}
 
