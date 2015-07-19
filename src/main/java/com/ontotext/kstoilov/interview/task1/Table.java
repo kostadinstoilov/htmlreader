@@ -21,8 +21,8 @@ public class Table {
 		headers.add(header);
 	}
 	
-	public void createColumn(int index) {
-		columns.set(index, new ArrayList<String>(ROWSIZE));
+	public void createColumn() {
+		columns.add(new ArrayList<String>(ROWSIZE));
 	}
 	
 	public void addToColumn(int index, String value) {
