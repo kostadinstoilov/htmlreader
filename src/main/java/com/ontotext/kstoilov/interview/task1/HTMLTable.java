@@ -1,6 +1,7 @@
 package com.ontotext.kstoilov.interview.task1;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class HTMLTable {
 	
@@ -8,9 +9,9 @@ public class HTMLTable {
 	
 	private static final int ROWSIZE = 100;
 	
-	private ArrayList<String> headers;
+	private List<String> headers;
 	
-	private ArrayList<ArrayList<String>> columns;
+	private List<ArrayList<String>> columns;
 	
 	public HTMLTable() {
 		headers = new ArrayList<String>(COLUMNSIZE);
@@ -29,7 +30,7 @@ public class HTMLTable {
 		columns.get(index).add(value);
 	}
 	
-	public ArrayList<String> getColumnByHeader(String headerName) {
+	public List<String> getColumnByHeader(String headerName) {
 		
 		for (int i = 0; i < headers.size(); i++) {
 			if (headers.get(i).equalsIgnoreCase(headerName)) {
