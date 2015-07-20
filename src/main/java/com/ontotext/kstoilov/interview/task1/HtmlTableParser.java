@@ -8,19 +8,19 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-public class HTMLTableParser extends DefaultHandler {
+public class HtmlTableParser extends DefaultHandler {
 	
-	private Stack<HTMLTable> tableStack;
+	private Stack<HtmlTable> tableStack;
 	
-	private List<HTMLTable> processedTables;
+	private List<HtmlTable> processedTables;
 	
 	private StringBuilder currentString = null;
 	
 	private int columnIndex = 0;
 	
-	public HTMLTableParser() {
-		tableStack = new Stack<HTMLTable>();
-		processedTables = new ArrayList<HTMLTable>();
+	public HtmlTableParser() {
+		tableStack = new Stack<HtmlTable>();
+		processedTables = new ArrayList<HtmlTable>();
 	}
 	
 	@Override
@@ -28,7 +28,7 @@ public class HTMLTableParser extends DefaultHandler {
 			throws SAXException {
 		 	
 		if (name.equalsIgnoreCase("table")) {
-			tableStack.push(new HTMLTable());
+			tableStack.push(new HtmlTable());
 		}
 		
 		else if (name.equalsIgnoreCase("th") || name.equalsIgnoreCase("td")) {
@@ -67,7 +67,7 @@ public class HTMLTableParser extends DefaultHandler {
 		}
 	}
 	
-	public List<HTMLTable> getTables() {
+	public List<HtmlTable> getTables() {
 		return processedTables;
 	}
 }

@@ -3,7 +3,7 @@ package com.ontotext.kstoilov.interview.task1;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HTMLTable {
+public class HtmlTable {
 	
 	private static final int COLUMNSIZE = 10;
 	
@@ -13,7 +13,7 @@ public class HTMLTable {
 	
 	private List<ArrayList<String>> columns;
 	
-	public HTMLTable() {
+	public HtmlTable() {
 		headers = new ArrayList<String>(COLUMNSIZE);
 		columns = new ArrayList<ArrayList<String>>(COLUMNSIZE);
 	}

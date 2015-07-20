@@ -12,13 +12,13 @@ import org.apache.commons.validator.routines.UrlValidator;
 import org.ccil.cowan.tagsoup.jaxp.SAXParserImpl;
 import org.xml.sax.SAXException;
 
-public class HTMLReader {
+public class HtmlReader {
 	
 	private String file;
 	
 	private List<String> people;
 	
-	public HTMLReader(String file) throws MalformedURLException, IOException, SAXException {
+	public HtmlReader(String file) throws MalformedURLException, IOException, SAXException {
 		this.file = file;
 		people = parseFile(getInputStream(file));
 	}
@@ -36,12 +36,12 @@ public class HTMLReader {
 	
 	private List<String> parseFile(InputStream input) throws SAXException, IOException {
 		
-		HTMLTableParser parser = new HTMLTableParser();
+		HtmlTableParser parser = new HtmlTableParser();
 		SAXParserImpl.newInstance(null).parse(input, parser);
 		
 		List<String> names = new ArrayList<String>(100);
 		
-		for (HTMLTable table : parser.getTables()) {
+		for (HtmlTable table : parser.getTables()) {
 			List<String> firstNames = table.getColumnByHeader("first name");
 			List<String> lastNames = table.getColumnByHeader("last name");
 			
