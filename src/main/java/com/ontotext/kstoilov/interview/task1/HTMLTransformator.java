@@ -38,7 +38,7 @@ public class HTMLTransformator {
 		}
 		
 		InputStream stream1 = new FileInputStream(args[0]);
-		final Stack<Table> tables = new Stack<Table>();
+		final Stack<HTMLTable> tables = new Stack<HTMLTable>();
 		
 		SAXParserImpl.newInstance(null).parse(stream1, new DefaultHandler() {
 			
@@ -51,7 +51,7 @@ public class HTMLTransformator {
 					throws SAXException {
 				 	
 				if (name.equalsIgnoreCase("table")) {
-					tables.push(new Table());
+					tables.push(new HTMLTable());
 				}
 				
 				else if (name.equalsIgnoreCase("th") || name.equalsIgnoreCase("td")) {

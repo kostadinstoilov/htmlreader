@@ -2,7 +2,7 @@ package com.ontotext.kstoilov.interview.task1;
 
 import java.util.ArrayList;
 
-public class Table {
+public class HTMLTable {
 	
 	private static final int COLUMNSIZE = 10;
 	
@@ -12,7 +12,7 @@ public class Table {
 	
 	private ArrayList<ArrayList<String>> columns;
 	
-	public Table() {
+	public HTMLTable() {
 		headers = new ArrayList<String>(COLUMNSIZE);
 		columns = new ArrayList<ArrayList<String>>(COLUMNSIZE);
 	}
