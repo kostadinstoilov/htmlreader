@@ -53,7 +53,7 @@ public class RdfBuilder {
 		Model model = null;
 		try {
 			for (String person : people) {
-				URI personURI= f.createURI(namespace, person);
+				URI personURI= f.createURI(namespace, person.replace(" ", ""));
 				conn.add(personURI, RDF.TYPE, FOAF.PERSON);
 				conn.add(personURI, RDFS.LABEL, f.createLiteral(person, XMLSchema.STRING));
 			}
