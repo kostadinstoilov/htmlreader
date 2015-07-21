@@ -16,7 +16,7 @@ There are two files with sample data in this repository with which the tool is t
 This project requires that you have maven installed and present in your $PATH. See - https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html
 
 ```bash
-git clone git@github.com:kostadinstoilov/htmlreader.git
+git clone https://github.com/kostadinstoilov/htmlreader.git
 cd htmlreader
 mvn compile
 ```
