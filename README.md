@@ -46,7 +46,7 @@ mvn exec:java -Dexec.mainClass="com.ontotext.kstoilov.interview.task1.Task1" -De
 The tool will dump output in A.html.rdf.xml, B.html.rdf.xml.
 
 
-## Supported RDF output options
+## Supported RDF output options (Argument #3)
 
 ```
 rdf.xml
