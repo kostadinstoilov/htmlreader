@@ -16,6 +16,8 @@ import org.openrdf.rio.RDFHandlerException;
 import org.xml.sax.SAXException;
 
 public class Task1 {
+	
+	private static final String NAMESPACE = "http://ontotext.com/kstoilov/interview/task1";
 
 	public static void writePlain(List<String> content, File file) {
 		
@@ -47,7 +49,7 @@ public class Task1 {
 		}	
 	}
 	
-	public static void writeRdf(List<String> content, File file) {
+	public static void writeRdf(List<String> content, File file, RDFFormat format) {
 		
 		RdfBuilder builder;
 		FileOutputStream fileStream;
@@ -59,8 +61,8 @@ public class Task1 {
 		}
 
 		try {
-			builder = new RdfBuilder("http://ontotext.com/kstoilov/interview/task1", content);
-			builder.write(fileStream, RDFFormat.TURTLE);
+			builder = new RdfBuilder(NAMESPACE, content);
+			builder.write(fileStream, format);
 		} catch (RepositoryException e) {
 			System.err.println("RDF Repository Exception " + e.getMessage());
 		} catch (RDFHandlerException e) {
@@ -93,7 +95,23 @@ public class Task1 {
 		File file = new File(new File(filename).getName() + "." + outputFormat);
 		
 		if (outputFormat.startsWith("rdf")) {
-			writeRdf(r.getPeople(), file);
+						
+			RDFFormat format = RDFFormat.TURTLE;
+			
+			if (outputFormat.equalsIgnoreCase("rdf.ntriples")) {
+				format = RDFFormat.NTRIPLES;
+			}
+			else if (outputFormat.equalsIgnoreCase("rdf.xml")) {
+				format = RDFFormat.RDFXML;
+			}
+			else if (outputFormat.equalsIgnoreCase("rdf.turtle")) {
+				format = RDFFormat.TURTLE;
+			}
+			else {
+				System.out.println("Unknown/Unsupported rdf format, defaulting to rdf.turtle");
+			}
+			
+			writeRdf(r.getPeople(), file, format);
 			return;
 		}
 		
@@ -102,12 +120,24 @@ public class Task1 {
 	
 	public static void main(String[] args) {
 		
+		String format = "plain";
+		
 		if (args.length < 2) {
 			System.out.println("The tool requires at leat two arguments.");
 			return;
 		}
 		
-		handleFile(args[1], "rdf");
+		else if (args.length == 3) {
+			if (args[2].startsWith("rdf")) {
+				format = args[2];			
+			}
+			else if (! args[2].equalsIgnoreCase(format)) {
+				System.out.println("Unknown/Unsupported output format " + args[3] + " defaulting to 'plain'");
+			}
+		}
+		
+		handleFile(args[0], format);
+		handleFile(args[1], format);
 	}
 
 }
