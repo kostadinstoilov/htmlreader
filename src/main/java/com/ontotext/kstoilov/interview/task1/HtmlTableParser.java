@@ -8,6 +8,11 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+/**
+ * SAX Handler implementation for reading HTML Table columns.
+ * @author kstoilov
+ */
+
 public class HtmlTableParser extends DefaultHandler {
 	
 	private Stack<HtmlTable> tableStack;

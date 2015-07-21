@@ -24,6 +24,11 @@ import org.openrdf.sail.memory.MemoryStore;
 
 import info.aduna.iteration.Iterations;
 
+/**
+ * Creates RDF output from a list of People with <FirstName LastName>. 
+ * @author kstoilov
+ */
+
 public class RdfBuilder {
 	
 	private String namespace;

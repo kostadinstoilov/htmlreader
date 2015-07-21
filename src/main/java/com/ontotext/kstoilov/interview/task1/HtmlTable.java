@@ -3,6 +3,11 @@ package com.ontotext.kstoilov.interview.task1;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Stores column/header info for an html table.
+ * @author kstoilov
+ */
+
 public class HtmlTable {
 	
 	private static final int COLUMNSIZE = 10;

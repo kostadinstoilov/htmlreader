@@ -12,6 +12,12 @@ import org.apache.commons.validator.routines.UrlValidator;
 import org.ccil.cowan.tagsoup.jaxp.SAXParserImpl;
 import org.xml.sax.SAXException;
 
+/**
+ * Reads an HTML file and stores table columns with headers <th>First Name</th> and <th>Last Name</th>.
+ * @author kstoilov
+ *
+ */
+
 public class HtmlReader {
 	
 	private String file;
