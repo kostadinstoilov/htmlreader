@@ -17,7 +17,7 @@ import org.xml.sax.SAXException;
 
 public class Task1 {
 	
-	private static final String NAMESPACE = "http://ontotext.com/kstoilov/interview/task1";
+	private static final String NAMESPACE = "http://ontotext.com/kstoilov/interview/task1/";
 
 	public static void writePlain(List<String> content, File file) {
 		
